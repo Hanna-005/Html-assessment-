@@ -1,0 +1,24 @@
+<html>
+<head><title>to do list</title>
+</head>
+
+<body>
+task : 
+	<input type="text" id='task'><br>
+	<button onclick="save()">save</button><br>
+	<button onclick="print()">print</button><br>
+	
+<script>
+	let collect=' ';
+	function save() {
+		
+		let list=document.getElementById('task').value;
+		collect=collect+" , "+list;
+		
+		}
+		
+	function print(){
+		document.write(collect);
+		}
+		
+</script></body></html>

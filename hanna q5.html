@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .quiz {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz">
+        <h2>Quiz</h2>
+        <div id="questionContainer"></div>
+        <button onclick="submitQuiz()">Submit</button>
+        <p id="score"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                answers: ["Berlin", "Madrid", "Paris", "Rome"],
+                correct: 2
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                answers: ["Earth", "Mars", "Jupiter", "Venus"],
+                correct: 1
+            },
+            {
+                question: "Who wrote 'Romeo and Juliet'?",
+                answers: ["Mark Twain", "William Shakespeare", "Charles Dickens", "Ernest Hemingway"],
+                correct: 1
+            },
+            {
+                question: "Which element has the chemical symbol 'O'?",
+                answers: ["Oxygen", "Osmium", "Oganesson", "Oxygenium"],
+                correct: 0
+            },
+            {
+                question: "In which year did World War II end?",
+                answers: ["1939", "1941", "1945", "1947"],
+                correct: 2
+            },
+            {
+                question: "What is the square root of 64?",
+                answers: ["6", "7", "8", "9"],
+                correct: 2
+            },
+            {
+                question: "Which language is primarily spoken in Brazil?",
+                answers: ["Spanish", "Portuguese", "French", "Italian"],
+                correct: 1
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                answers: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+                correct: 2
+            },
+            {
+                question: "What is the hardest natural substance on Earth?",
+                answers: ["Gold", "Iron", "Diamond", "Graphite"],
+                correct: 2
+            },
+            {
+                question: "Which is the largest ocean on Earth?",
+                answers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                correct: 3
+            }
+        ];
+
+        let score = 0;
+
+        window.onload = function() {
+            const container = document.getElementById('questionContainer');
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<p>${q.question}</p>`;
+                q.answers.forEach((answer, i) => {
+                    questionDiv.innerHTML += `<input type="radio" name="q${index}" value="${i}"> ${answer}<br>`;
+                });
+                container.appendChild(questionDiv);
+            });
+        };
+
+        function submitQuiz() {
+            score = 0;  // Reset score for multiple attempts
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && selected.value == q.correct) {
+                    score++;
+                }
+            });
+            document.getElementById('score').innerText = `Your score is ${score}/${questions.length}`;
+        }
+    </script>
+</body>
+</html>
